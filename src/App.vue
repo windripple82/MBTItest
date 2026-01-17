@@ -36,8 +36,14 @@ const finishQuiz = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-900 text-white font-sans selection:bg-purple-500 selection:text-white overflow-x-hidden">
-    <div class="container mx-auto px-4 py-8 min-h-screen flex flex-col justify-center">
+  <div class="min-h-screen bg-[#000000] text-white font-sans selection:bg-blue-500 selection:text-white overflow-x-hidden relative">
+    <!-- Ambient Background Mesh -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/30 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/30 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow delay-1000"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 min-h-screen flex flex-col justify-center relative z-10">
       
       <transition name="fade" mode="out-in">
         <WelcomeScreen 

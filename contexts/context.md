@@ -13,9 +13,11 @@
     - 欢迎页、答题卡、结果分析页组件
     - MBTI 维度计分逻辑 (`src/utils/mbtiLogic.ts`)
 - **待办**:
-    - 等待依赖安装完成 (`npm install`)
-    - 验证构建与运行 (`npm run dev`)
-    - 关联 GitHub 远程仓库
+- **待办**:
+    - [x] 确保依赖安装完整 (`npm install`)
+    - [x] 启动开发服务器 (`npm run dev`)
+    - [ ] 浏览器功能验收 (Welcome -> Quiz -> Result) - *需人工验证 (Env: No Chrome)*
+    - [x] 关联 GitHub 远程仓库
 
 ## 架构概览
 - `src/components`: UI 组件
