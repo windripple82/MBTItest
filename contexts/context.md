@@ -7,16 +7,17 @@
 - **创建时间**: 2026-01-17
 
 ## 当前状态
-- **进度**: 初始化完成，核心代码已编写。
+- **进度**: V1.0 发布 (Stable)
 - **功能**:
-    - 完整 60 题 MBTI 问卷 (`src/data/questions.ts`)
-    - 欢迎页、答题卡、结果分析页组件
-    - MBTI 维度计分逻辑 (`src/utils/mbtiLogic.ts`)
-- **待办**:
+    - [x] 完整 60 题 MBTI 问卷
+    - [x] 核心计分算法 (EI/SN/TF/JP)
+    - [x] 全站中文化 (Localization)
+    - [x] iOS 风格玻璃拟态 UI (Glassmorphism)
+    - [x] 响应式交互与动效
 - **待办**:
     - [x] 确保依赖安装完整 (`npm install`)
     - [x] 启动开发服务器 (`npm run dev`)
-    - [ ] 浏览器功能验收 (Welcome -> Quiz -> Result) - *需人工验证 (Env: No Chrome)*
+    - [x] 浏览器功能验收 (Welcome -> Quiz -> Result)
     - [x] 关联 GitHub 远程仓库
 
 ## 架构概览
