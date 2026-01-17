@@ -2,7 +2,7 @@
 
 ## 项目基础信息
 - **项目名称**: MBTItest
-- **路径**: `\\huanghe\home\Drive\Private\AICoding\MBTItest`
+- **路径**: `D:\AICoding\MBTItest`
 - **技术栈**: Vue 3 + TypeScript + Vite + Tailwind CSS
 - **创建时间**: 2026-01-17
 
