@@ -3,17 +3,19 @@ import { ref, computed } from 'vue';
 import WelcomeScreen from './components/WelcomeScreen.vue';
 import QuizCard from './components/QuizCard.vue';
 import ResultView from './components/ResultView.vue';
-import { questions } from './data/questions';
+import { questions, getQuestions, type TestVersion, type Question } from './data/questions';
 import { calculateMBTI, type MBTIResult } from './utils/mbtiLogic';
 
 const step = ref<'welcome' | 'quiz' | 'result'>('welcome');
 const currentQuestionIndex = ref(0);
 const answers = ref<string[]>([]);
 const result = ref<MBTIResult | null>(null);
+const currentQuestions = ref<Question[]>(questions);
 
-const currentQuestion = computed(() => questions[currentQuestionIndex.value]);
+const currentQuestion = computed(() => currentQuestions.value[currentQuestionIndex.value]);
 
-const startQuiz = () => {
+const startQuiz = (version: TestVersion = 60) => {
+  currentQuestions.value = getQuestions(version);
   step.value = 'quiz';
   currentQuestionIndex.value = 0;
   answers.value = [];
@@ -22,7 +24,7 @@ const startQuiz = () => {
 
 const handleAnswer = (value: string) => {
   answers.value.push(value);
-  if (currentQuestionIndex.value < questions.length - 1) {
+  if (currentQuestionIndex.value < currentQuestions.value.length - 1) {
     currentQuestionIndex.value++;
   } else {
     finishQuiz();

@@ -2,6 +2,9 @@
 import { PropType } from 'vue';
 import type { MBTIResult } from '../utils/mbtiLogic';
 
+
+import html2canvas from 'html2canvas';
+
 defineProps({
   result: {
     type: Object as PropType<MBTIResult>,
@@ -9,10 +12,31 @@ defineProps({
   }
 });
 defineEmits(['restart']);
+
+const downloadImage = async () => {
+  const element = document.getElementById('result-capture-area');
+  if (!element) return;
+  
+  try {
+    const canvas = await html2canvas(element, {
+      backgroundColor: '#000000',
+      scale: 2, // High resolution
+      useCORS: true
+    });
+    
+    const link = document.createElement('a');
+    link.download = `MBTI-Result-${new Date().getTime()}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch (error) {
+    console.error('Failed to generate image', error);
+  }
+};
 </script>
 
 <template>
   <div class="w-full max-w-4xl mx-auto px-4 animate-fade-in pb-12">
+    <div id="result-capture-area" class="p-8 md:p-12 rounded-3xl bg-[#000000]">
     <div class="text-center mb-16 relative">
       <!-- Glow effect behind text -->
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/20 blur-[100px] rounded-full"></div>
@@ -57,12 +81,19 @@ defineEmits(['restart']);
       </div>
     </div>
 
-    <div class="text-center">
+  </div>
+    <div class="text-center space-x-4">
+      <button 
+        @click="downloadImage"
+        class="px-8 py-3 bg-[#007AFF] hover:bg-[#0062cc] text-white rounded-full font-semibold transition-all duration-200 shadow-lg hover:shadow-blue-500/30 active:scale-95"
+      >
+        保存结果图片
+      </button>
       <button 
         @click="$emit('restart')"
-        class="px-10 py-4 bg-white/10 hover:bg-white/20 text-white rounded-full font-semibold transition-all duration-200 border border-white/10 backdrop-blur-md active:scale-95"
+        class="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-semibold transition-all duration-200 border border-white/10 backdrop-blur-md active:scale-95"
       >
-        重新测试 (Retake)
+        重新测试
       </button>
     </div>
   </div>

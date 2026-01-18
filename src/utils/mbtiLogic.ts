@@ -2,7 +2,7 @@ export type Dimension = 'EI' | 'SN' | 'TF' | 'JP';
 
 export interface MBTIResult {
     type: string;
-    scores: Record<Dimension, { char: string; score: number; total: number }>;
+    scores: Record<Dimension, { char: string; score: number; total: number; otherScore: number }>;
     description: string;
 }
 
@@ -24,7 +24,7 @@ export const calculateMBTI = (answers: string[]): MBTIResult => {
         }
     });
 
-    const getDimensionType = (dim: Dimension, char1: string, char2: string) => {
+    const getDimensionType = (_dim: Dimension, char1: string, char2: string) => {
         const c1 = counts[char1];
         const c2 = counts[char2];
         const total = c1 + c2;
