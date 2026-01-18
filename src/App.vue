@@ -57,7 +57,7 @@ const finishQuiz = () => {
           v-else-if="step === 'quiz'" 
           :question="currentQuestion"
           :current-step="currentQuestionIndex + 1"
-          :total-steps="questions.length"
+          :total-steps="currentQuestions.length"
           @answer="handleAnswer"
         />
         
