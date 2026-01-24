@@ -17,34 +17,44 @@ defineEmits(['answer']);
 <template>
   <div class="w-full max-w-2xl mx-auto px-4 animate-slide-up">
     <!-- Progress -->
-    <div class="mb-10">
-      <div class="flex justify-between text-sm font-medium text-gray-400 mb-3 px-1">
-        <span>问题 {{ currentStep }} / {{ totalSteps }}</span>
+    <div class="mb-12 relative">
+      <div class="flex justify-between text-sm font-medium text-gray-400 mb-4 px-1 tracking-wide font-display">
+        <span>QUESTION {{ currentStep }} / {{ totalSteps }}</span>
         <span>{{ Math.round(((currentStep || 0) / (totalSteps || 1)) * 100) }}%</span>
       </div>
-      <div class="h-2 bg-gray-800/50 rounded-full overflow-hidden backdrop-blur-sm">
+      <div class="h-1 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
         <div 
-          class="h-full bg-[#007AFF] shadow-[0_0_10px_rgba(0,122,255,0.5)] transition-all duration-500 ease-out rounded-full"
+          class="h-full bg-gradient-to-r from-brand-400 to-purple-500 shadow-[0_0_15px_rgba(56,189,248,0.5)] transition-all duration-700 ease-out rounded-full relative"
           :style="{ width: `${((currentStep || 0) / (totalSteps || 1)) * 100}%` }"
-        ></div>
+        >
+          <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)] blur-[1px]"></div>
+        </div>
       </div>
     </div>
 
     <!-- Question -->
-    <div class="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl ring-1 ring-black/5">
-      <h2 class="text-2xl md:text-3xl font-semibold text-white mb-10 text-center leading-snug tracking-tight">
+    <div class="glass rounded-[2rem] p-10 md:p-14 relative overflow-hidden group">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+      
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center leading-tight tracking-tight font-display drop-shadow-sm">
         {{ question.text }}
       </h2>
 
-      <div class="grid grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 gap-5">
         <button 
           v-for="opt in question.options" 
           :key="opt.value"
           @click="$emit('answer', opt.value)"
-          class="group relative w-full p-5 rounded-2xl bg-white/5 hover:bg-white/10 active:bg-white/20 border border-white/5 transition-all duration-200 text-left flex items-center shadow-sm hover:shadow-md active:scale-[0.98]"
+          class="group/btn relative w-full p-6 rounded-2xl bg-white/5 hover:bg-white/10 active:bg-white/20 border border-white/5 transition-all duration-300 text-left flex items-center shadow-lg hover:shadow-brand-500/10 active:scale-[0.99] overflow-hidden"
         >
-          <div class="w-6 h-6 rounded-full border-2 border-white/30 mr-4 group-hover:border-[#007AFF] group-hover:bg-[#007AFF]/20 transition-colors"></div>
-          <span class="text-lg text-gray-100 font-medium group-hover:text-white">
+          <!-- Hover Gradient Background -->
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/0 to-purple-500/0 group-hover/btn:from-brand-500/10 group-hover/btn:via-transparent group-hover/btn:to-transparent transition-all duration-500"></div>
+          
+          <div class="relative w-8 h-8 rounded-full border border-white/30 mr-6 group-hover/btn:border-brand-400 group-hover/btn:scale-110 transition-all duration-300 flex items-center justify-center">
+            <div class="w-4 h-4 rounded-full bg-brand-400 opacity-0 group-hover/btn:opacity-100 transition-all duration-300 scale-0 group-hover/btn:scale-100"></div>
+          </div>
+          
+          <span class="relative text-xl text-gray-200 font-light group-hover/btn:text-white transition-colors">
             {{ opt.text }}
           </span>
         </button>

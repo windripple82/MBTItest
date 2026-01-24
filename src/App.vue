@@ -38,11 +38,12 @@ const finishQuiz = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#000000] text-white font-sans selection:bg-blue-500 selection:text-white overflow-x-hidden relative">
+  <div class="min-h-screen bg-slate-950 text-white font-sans selection:bg-brand-500 selection:text-white overflow-x-hidden relative bg-noise">
     <!-- Ambient Background Mesh -->
-    <div class="fixed inset-0 z-0 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/30 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/30 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow delay-1000"></div>
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-brand-900/40 rounded-full blur-[120px] mix-blend-screen animate-float"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[50%] h-[50%] bg-purple-900/40 rounded-full blur-[100px] mix-blend-screen animate-float-delayed"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[60%] h-[60%] bg-blue-900/30 rounded-full blur-[130px] mix-blend-screen animate-pulse-slow"></div>
     </div>
 
     <div class="container mx-auto px-4 py-8 min-h-screen flex flex-col justify-center relative z-10">

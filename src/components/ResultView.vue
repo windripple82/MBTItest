@@ -36,63 +36,74 @@ const downloadImage = async () => {
 
 <template>
   <div class="w-full max-w-4xl mx-auto px-4 animate-fade-in pb-12">
-    <div id="result-capture-area" class="p-8 md:p-12 rounded-3xl bg-[#000000]">
-    <div class="text-center mb-16 relative">
-      <!-- Glow effect behind text -->
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/20 blur-[100px] rounded-full"></div>
-      
-      <h2 class="text-gray-400 text-sm font-semibold mb-4 tracking-[0.2em] uppercase relative z-10">您的性格类型 (Your Type)</h2>
-      <h1 class="text-7xl md:text-9xl font-bold text-white mb-8 tracking-tighter drop-shadow-2xl relative z-10">
-        {{ result.type }}
-      </h1>
-      <div class="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 max-w-3xl mx-auto relative z-10">
-        <p class="text-xl md:text-2xl text-gray-200 leading-relaxed font-light">
-          {{ result.description }}
-        </p>
-      </div>
-    </div>
+    <div id="result-capture-area" class="p-8 md:p-16 rounded-[3rem] bg-gradient-to-b from-slate-900 to-black border border-white/10 relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute inset-0 bg-noise opacity-30 mix-blend-overlay"></div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      <div class="text-center mb-20 relative z-10">
+        <h2 class="text-brand-400 text-sm font-bold mb-6 tracking-[0.3em] uppercase font-display">Your Personality Archetype</h2>
+        
+        <div class="relative inline-block">
+            <h1 class="text-8xl md:text-[10rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-100 to-white tracking-tighter drop-shadow-2xl font-display mb-2 leading-none">
+            {{ result.type }}
+            </h1>
+            <div class="absolute -inset-10 bg-brand-500/20 blur-[60px] rounded-full -z-10 animate-glow"></div>
+        </div>
+
+        <div class="glass rounded-2xl p-10 border-white/10 max-w-3xl mx-auto mt-12 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+            <p class="text-xl md:text-2xl text-gray-200 leading-relaxed font-light text-left pl-4">
+            {{ result.description }}
+            </p>
+        </div>
+      </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 relative z-10">
       <!-- Dimensions -->
-      <div v-for="(val, key) in result.scores" :key="key" class="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/5 shadow-lg">
-        <div class="flex justify-between items-center mb-5">
-          <span class="text-lg font-bold" :class="val.char === key[0] ? 'text-white' : 'text-gray-500'">{{ key[0] }}</span>
-          <span class="text-lg font-bold" :class="val.char === key[1] ? 'text-white' : 'text-gray-500'">{{ key[1] }}</span>
+      <div v-for="(val, key) in result.scores" :key="key" class="glass rounded-2xl p-8 border border-white/5 hover:bg-white/5 transition-colors duration-300">
+        <div class="flex justify-between items-center mb-6">
+          <span class="text-2xl font-bold font-display" :class="val.char === key[0] ? 'text-white drop-shadow-md' : 'text-gray-600'">{{ key[0] }}</span>
+          <span class="text-2xl font-bold font-display" :class="val.char === key[1] ? 'text-white drop-shadow-md' : 'text-gray-600'">{{ key[1] }}</span>
         </div>
         
-        <div class="relative h-3 bg-gray-800/50 rounded-full overflow-hidden shadow-inner">
-            <div class="absolute inset-0 flex">
+        <div class="relative h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="absolute inset-0 flex items-center">
+                <!-- Left Bar -->
                 <div 
-                  class="h-full bg-gradient-to-r from-pink-500 to-rose-500 transition-all duration-1000 ease-out"
+                  class="h-full bg-gradient-to-r from-brand-400 to-brand-600 shadow-[0_0_10px_rgba(56,189,248,0.4)] transition-all duration-1000 ease-out rounded-r-full"
                   :style="{ width: `${(val.char === key[0] ? val.score : val.otherScore) / val.total * 100}%` }"
                 ></div>
-                <!-- Middle separator/gap implicitly handled by remaining space -->
+                <!-- Right Bar -->
                 <div 
-                  class="h-full bg-gradient-to-l from-indigo-500 to-blue-500 transition-all duration-1000 ease-out ml-auto"
+                  class="h-full bg-gradient-to-l from-purple-400 to-purple-600 shadow-[0_0_10px_rgba(168,85,247,0.4)] transition-all duration-1000 ease-out ml-auto rounded-l-full"
                   :style="{ width: `${(val.char === key[1] ? val.score : val.otherScore) / val.total * 100}%` }"
                 ></div>
             </div>
         </div>
         
-        <div class="flex justify-between mt-3 text-xs font-medium text-gray-400 font-mono">
-           <span>{{ Math.round((val.char === key[0] ? val.score : val.otherScore) / val.total * 100) }}%</span>
-           <span>{{ Math.round((val.char === key[1] ? val.score : val.otherScore) / val.total * 100) }}%</span>
+        <div class="flex justify-between mt-4 text-xs font-bold text-gray-400 font-mono tracking-wider">
+           <span :class="{'text-brand-400': val.char === key[0]}">{{ Math.round((val.char === key[0] ? val.score : val.otherScore) / val.total * 100) }}%</span>
+           <span :class="{'text-purple-400': val.char === key[1]}">{{ Math.round((val.char === key[1] ? val.score : val.otherScore) / val.total * 100) }}%</span>
         </div>
       </div>
     </div>
 
   </div>
-    <div class="text-center space-x-4">
+    <div class="text-center flex flex-col md:flex-row gap-6 justify-center mt-12">
       <button 
         @click="downloadImage"
-        class="px-8 py-3 bg-[#007AFF] hover:bg-[#0062cc] text-white rounded-full font-semibold transition-all duration-200 shadow-lg hover:shadow-blue-500/30 active:scale-95"
+        class="px-10 py-4 bg-white text-black hover:bg-gray-100 rounded-full font-bold transition-all duration-300 shadow-xl hover:shadow-white/20 active:scale-95 flex items-center justify-center gap-2 group"
       >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
         保存结果图片
       </button>
       <button 
         @click="$emit('restart')"
-        class="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-semibold transition-all duration-200 border border-white/10 backdrop-blur-md active:scale-95"
+        class="px-10 py-4 bg-white/5 hover:bg-white/10 text-white rounded-full font-semibold transition-all duration-300 border border-white/10 backdrop-blur-md active:scale-95 flex items-center justify-center gap-2"
       >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
         重新测试
       </button>
     </div>

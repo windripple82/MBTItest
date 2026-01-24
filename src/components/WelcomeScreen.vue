@@ -13,48 +13,57 @@ const getTimeEstimate = (v: number) => {
 </script>
 
 <template>
-  <div class="text-center space-y-12 animate-fade-in flex flex-col items-center">
+  <div class="text-center space-y-16 animate-fade-in flex flex-col items-center max-w-5xl mx-auto">
     <!-- Hero Section -->
-    <div class="relative group">
-      <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-40 group-hover:opacity-60 transition duration-1000"></div>
-      <div class="relative px-8 py-6 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl leading-none flex items-center justify-center">
-        <span class="text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-lg">
-          MBTI 职业性格测试
+    <div class="relative group cursor-default">
+      <div class="absolute -inset-4 bg-gradient-to-r from-brand-500 via-purple-500 to-pink-500 rounded-[2rem] blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000 animate-pulse-slow"></div>
+      <div class="relative px-12 py-10 glass rounded-[2rem] flex flex-col items-center justify-center border-white/20">
+        <div class="text-brand-300 font-medium tracking-[0.2em] mb-4 uppercase text-sm">Professional Assessment</div>
+        <h1 class="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-100 to-white tracking-tight font-display drop-shadow-sm">
+          MBTI
+        </h1>
+        <div class="h-px w-24 bg-gradient-to-r from-transparent via-white/50 to-transparent my-6"></div>
+        <span class="text-xl md:text-2xl font-light text-gray-200 tracking-widest font-display">
+          职业性格测试
         </span>
       </div>
     </div>
     
-    <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
-      通过我们严谨的 60 道心理测试题，深入探索你真实的性格类型。<br class="hidden md:block"/>
-      发掘你的<span class="text-white font-medium">核心优势</span>、<span class="text-white font-medium">情感模式</span>与<span class="text-white font-medium">职业潜能</span>。
+    <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light tracking-wide bg-gradient-to-b from-white/10 to-transparent p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
+      探索你的<span class="text-brand-300 font-medium">核心优势</span>。解锁你的<span class="text-purple-300 font-medium">无限潜能</span>。<br class="hidden md:block"/>
+      基于荣格心理学理论的专业人格测评工具。
     </p>
 
-    <div class="space-y-6 w-full max-w-md">
-      <div class="grid grid-cols-3 gap-3 p-1 bg-white/10 rounded-xl backdrop-blur-sm border border-white/5">
+    <div class="space-y-8 w-full max-w-xl">
+      <div class="grid grid-cols-3 gap-4 p-2 glass rounded-2xl">
         <button 
           v-for="v in versions" 
           :key="v"
           @click="selectedVersion = v"
           :class="[
-            'py-3 px-4 rounded-lg text-sm font-medium transition-all duration-200',
+            'relative py-4 px-4 rounded-xl text-sm font-medium transition-all duration-300 overflow-hidden group',
             selectedVersion === v 
-              ? 'bg-[#007AFF] text-white shadow-lg shadow-blue-500/30' 
-              : 'text-gray-400 hover:text-white hover:bg-white/5'
+              ? 'bg-brand-600/20 text-white shadow-inner border border-brand-500/50' 
+              : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
           ]"
         >
-          {{ v }}道题
-          <span class="block text-[10px] opacity-60 font-normal mt-0.5">{{ getTimeEstimate(v) }}</span>
+          <div v-if="selectedVersion === v" class="absolute inset-0 bg-brand-400/10 blur-sm"></div>
+          <span class="relative z-10 text-lg font-display font-bold">{{ v }}</span>
+          <span class="relative z-10 block text-[10px] opacity-60 font-sans mt-0.5 uppercase tracking-wide">{{ getTimeEstimate(v) }}</span>
         </button>
       </div>
 
       <button 
         @click="$emit('start', selectedVersion)" 
-        class="group relative w-full inline-flex items-center justify-center px-10 py-4 text-xl font-semibold text-white transition-all duration-300 bg-[#007AFF] hover:bg-[#0062cc] active:scale-95 rounded-full shadow-lg hover:shadow-blue-500/30 ring-1 ring-white/20"
+        class="group relative w-full inline-flex items-center justify-center px-12 py-5 text-xl font-bold text-white transition-all duration-300 bg-gradient-to-r from-brand-600 to-blue-700 hover:from-brand-500 hover:to-blue-600 rounded-2xl shadow-xl hover:shadow-brand-500/25 ring-1 ring-white/10 overflow-hidden"
       >
-        开始测试
-        <svg class="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        <span class="relative z-10 flex items-center gap-3">
+          开始探索
+          <svg class="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </span>
       </button>
     </div>
   </div>
