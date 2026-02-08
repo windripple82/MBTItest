@@ -1,33 +1,33 @@
-# 项目上下文 (Context)
+# MBTItest 项目上下文
 
-## 项目基础信息
-- **项目名称**: MBTItest
-- **路径**: `D:\AICoding\MBTItest`
-- **技术栈**: Vue 3 + TypeScript + Vite + Tailwind CSS
-- **创建时间**: 2026-01-17
+## 项目定位
+MBTI 性格测试 Web 应用，基于 Vue 3 + TypeScript + Vite 构建。
 
-## 当前状态
-- **进度**: V1.1 UI 重构 (Polished)
-- **功能**:
-    - [x] 完整 60/93/144 题 MBTI 问卷 (支持版本选择)
-    - [x] 核心计分算法 (EI/SN/TF/JP)
-    - [x] 结果页图片下载功能 (html2canvas)
-    - [x] 全站中文化 (Localization)
-    - [x] **UI 大升级 (Frontend Design Skill)**:
-        - [x] 引入 Space Grotesk (Title) + Outfit (Body) 字体栈
-        - [x] 实现 "Aurora Deep" 动态噪点背景
-        - [x] 重构 Glassmorphism 组件 (Welcome/Quiz/Result)
-        - [x] 优化交互动效与微反馈
-    - [x] **数据完整性修复**:
-        - [x] 补全 144 道不重复的 MBTI 测试题 (Unique Questions)
-        - [x] 优化 93 题版本的维度平衡逻辑
-    - [x] 响应式交互与动效
-- **待办**:
-    - [ ] 更多性格类型的详细解读补充
-    - [ ] 社交分享元数据优化
+## 核心功能
+- MBTI 93 题完整测试
+- 实时计算性格类型结果
+- 响应式设计，支持移动端
 
-## 架构概览
-- `src/components`: UI 组件
-- `src/data`: 静态数据 (题目)
-- `src/utils`: 业务逻辑 (算法)
-- `src/App.vue`: 主控逻辑
+## 技术栈
+- **前端**: Vue 3 + TypeScript + Vite
+- **样式**: Tailwind CSS
+- **部署**: GitHub Pages
+
+## 当前状态 (2026-02-08)
+- [x] V1.1 完成 - UI 视觉重构与数据完整性修复
+- [x] 93 题完整数据
+- [x] 进度条修复
+- [x] 中文化完成
+
+## 关键约束
+1. **中文优先**: 题目描述、UI 文案使用中文
+2. **Git 提交**: 使用中文提交信息
+3. **代码规范**: 遵循 ai-coding-standards 配置中心规范
+
+## 最近更新
+- 修复进度条总题数显示问题
+- 添加对比报告功能
+- UI 视觉重构
+
+---
+*记录人：逸风*
