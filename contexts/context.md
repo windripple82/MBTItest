@@ -10,10 +10,28 @@ MBTI 性格测试 Web 应用，基于 Vue 3 + TypeScript + Vite 构建。
 
 ## 技术栈
 - **前端**: Vue 3 + TypeScript + Vite
+- **路由**: Vue Router 5.0
+- **状态管理**: Composable 模式（useQuiz）
 - **样式**: Tailwind CSS
 - **部署**: GitHub Pages
 
-## 当前状态 (2026-02-08)
+## 当前状态 (2026-02-10)
+- [x] **架构升级第一阶段完成**
+- [x] Vue Router 集成（路由懒加载、导航守卫）
+- [x] useQuiz Composable 状态管理（支持持久化）
+- [x] 布局组件拆分（DefaultLayout）
+- [ ] 第二阶段待实施（ESLint、错误处理、测试）
+
+### 已知问题
+- 缺少单元测试覆盖
+- 缺少全局错误处理
+- 缺少 ESLint/Prettier 配置
+
+---
+
+## 历史状态
+
+### 2026-02-08 架构升级前
 - [x] V1.1 完成 - UI 视觉重构与数据完整性修复
 - [x] 93 题完整数据
 - [x] 进度条修复

@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-defineEmits(['start']);
+import { ref } from 'vue'
+import { useQuiz } from '@/composables/useQuiz'
+import type { TestVersion } from '@/data/questions'
 
-const versions = [60, 93, 144] as const;
-const selectedVersion = ref<60 | 93 | 144>(60);
+/**
+ * 欢迎页面组件
+ * 提供版本选择和开始测试功能
+ */
+const { startQuiz } = useQuiz()
+
+const versions = [60, 93, 144] as const
+const selectedVersion = ref<TestVersion>(60)
 
 const getTimeEstimate = (v: number) => {
-  if (v === 60) return '~10分钟';
-  if (v === 93) return '~15分钟';
-  return '~25分钟';
-};
+  if (v === 60) return '~10分钟'
+  if (v === 93) return '~15分钟'
+  return '~25分钟'
+}
+
+const handleStart = () => {
+  startQuiz(selectedVersion.value)
+}
 </script>
 
 <template>
@@ -28,7 +39,7 @@ const getTimeEstimate = (v: number) => {
         </span>
       </div>
     </div>
-    
+
     <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light tracking-wide bg-gradient-to-b from-white/10 to-transparent p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
       探索你的<span class="text-brand-300 font-medium">核心优势</span>。解锁你的<span class="text-purple-300 font-medium">无限潜能</span>。<br class="hidden md:block"/>
       基于荣格心理学理论的专业人格测评工具。
@@ -36,14 +47,14 @@ const getTimeEstimate = (v: number) => {
 
     <div class="space-y-8 w-full max-w-xl">
       <div class="grid grid-cols-3 gap-4 p-2 glass rounded-2xl">
-        <button 
-          v-for="v in versions" 
+        <button
+          v-for="v in versions"
           :key="v"
           @click="selectedVersion = v"
           :class="[
             'relative py-4 px-4 rounded-xl text-sm font-medium transition-all duration-300 overflow-hidden group',
-            selectedVersion === v 
-              ? 'bg-brand-600/20 text-white shadow-inner border border-brand-500/50' 
+            selectedVersion === v
+              ? 'bg-brand-600/20 text-white shadow-inner border border-brand-500/50'
               : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
           ]"
         >
@@ -53,8 +64,8 @@ const getTimeEstimate = (v: number) => {
         </button>
       </div>
 
-      <button 
-        @click="$emit('start', selectedVersion)" 
+      <button
+        @click="handleStart"
         class="group relative w-full inline-flex items-center justify-center px-12 py-5 text-xl font-bold text-white transition-all duration-300 bg-gradient-to-r from-brand-600 to-blue-700 hover:from-brand-500 hover:to-blue-600 rounded-2xl shadow-xl hover:shadow-brand-500/25 ring-1 ring-white/10 overflow-hidden"
       >
         <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
