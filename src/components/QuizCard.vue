@@ -69,19 +69,25 @@ const handleOptionClick = (value: string) => {
       </div>
 
       <!-- Navigation Buttons -->
-      <div v-if="canGoBack" class="flex justify-center gap-4 mt-8">
-        <button
-          @click="previousQuestion"
-          class="px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-medium transition-all duration-300 border border-white/10 backdrop-blur-md active:scale-95"
-        >
-          上一题
-        </button>
-        <button
-          @click="restartQuiz"
-          class="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-300 rounded-xl font-medium transition-all duration-300 border border-red-500/20 backdrop-blur-md active:scale-95"
-        >
-          重新开始
-        </button>
+      <div class="flex flex-col items-center gap-4 mt-8">
+        <!-- 上一题按钮 -->
+        <div v-if="canGoBack" class="w-full max-w-xs">
+          <button
+            @click="previousQuestion"
+            class="w-full px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-medium transition-all duration-300 border border-white/10 backdrop-blur-md active:scale-95"
+          >
+            上一题
+          </button>
+        </div>
+        <!-- 重新开始按钮 -->
+        <div class="w-full max-w-xs">
+          <button
+            @click="restartQuiz"
+            class="w-full px-6 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-300 rounded-xl font-medium transition-all duration-300 border border-red-500/20 backdrop-blur-md active:scale-95"
+          >
+            重新开始
+          </button>
+        </div>
       </div>
     </div>
   </div>

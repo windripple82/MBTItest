@@ -39,6 +39,9 @@ export function useQuiz() {
     }
   }
 
+  // 自动调用初始化函数，确保每次创建实例时都恢复状态
+  initFromStorage()
+
   // 持久化状态到本地存储
   watch(
     [currentQuestionIndex, answers, currentQuestions, result],
@@ -64,7 +67,20 @@ export function useQuiz() {
     currentQuestionIndex.value = 0
     answers.value = []
     result.value = null
-    clearStorage()
+    
+    // 手动保存状态到本地存储，确保跳转到quiz路由前状态已保存
+    try {
+      const stateToSave = {
+        currentQuestionIndex: 0,
+        answers: [],
+        currentQuestions: currentQuestions.value,
+        result: null
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave))
+    } catch (error) {
+      console.error('保存状态到本地存储失败:', error)
+    }
+    
     router.push('/quiz')
   }
 
