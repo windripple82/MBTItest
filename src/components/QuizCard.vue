@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useQuiz } from '@/composables/useQuiz'
+import { useQuiz } from '../composables/useQuiz'
 
 /**
  * 答题卡片组件

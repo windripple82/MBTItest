@@ -1,7 +1,7 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { questions, getQuestions, type TestVersion, type Question } from '@/data/questions'
-import { calculateMBTI, type MBTIResult } from '@/utils/mbtiLogic'
+import { questions, getQuestions, type TestVersion, type Question } from '../data/questions'
+import { calculateMBTI, type MBTIResult } from '../utils/mbtiLogic'
 
 // 本地存储键名
 const STORAGE_KEY = 'mbti-quiz-state'
@@ -32,6 +32,7 @@ export function useQuiz() {
         currentQuestionIndex.value = state.currentQuestionIndex || 0
         answers.value = state.answers || []
         currentQuestions.value = state.currentQuestions || questions
+        result.value = state.result || null
       }
     } catch (error) {
       console.error('从本地存储恢复状态失败:', error)
@@ -40,13 +41,14 @@ export function useQuiz() {
 
   // 持久化状态到本地存储
   watch(
-    [currentQuestionIndex, answers, currentQuestions],
-    ([index, ans, qs]) => {
+    [currentQuestionIndex, answers, currentQuestions, result],
+    ([index, ans, qs, res]) => {
       try {
         const stateToSave = {
           currentQuestionIndex: index,
           answers: ans,
-          currentQuestions: qs
+          currentQuestions: qs,
+          result: res
         }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave))
       } catch (error) {
@@ -80,7 +82,6 @@ export function useQuiz() {
   // 完成测试
   const finishQuiz = () => {
     result.value = calculateMBTI(answers.value)
-    clearStorage()
     router.push('/result')
   }
 

@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 // 懒加载组件以提升性能
-const WelcomeScreen = () => import('@/components/WelcomeScreen.vue')
-const QuizCard = () => import('@/components/QuizCard.vue')
-const ResultView = () => import('@/components/ResultView.vue')
+const WelcomeScreen = () => import('../components/WelcomeScreen.vue')
+const QuizCard = () => import('../components/QuizCard.vue')
+const ResultView = () => import('../components/ResultView.vue')
 
 const routes: RouteRecordRaw[] = [
   {

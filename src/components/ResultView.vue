@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useQuiz } from '@/composables/useQuiz'
+import { useQuiz } from '../composables/useQuiz'
 import html2canvas from 'html2canvas'
 
 /**

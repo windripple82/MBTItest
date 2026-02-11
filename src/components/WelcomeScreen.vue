@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useQuiz } from '@/composables/useQuiz'
-import type { TestVersion } from '@/data/questions'
+import { useQuiz } from '../composables/useQuiz'
+import type { TestVersion } from '../data/questions'
 
 /**
  * 欢迎页面组件

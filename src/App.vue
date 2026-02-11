@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
-import { useQuiz } from '@/composables/useQuiz'
+import DefaultLayout from './layouts/DefaultLayout.vue'
+import { useQuiz } from './composables/useQuiz'
 
 /**
  * 应用根组件
